@@ -114,3 +114,41 @@ body {
 	padding: 100px 0;
 	text-align: center;
 }
+
+/* Films Desc */
+
+.btn-close {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    padding: 10px;
+}
+
+.film {
+    display: grid;
+    grid-template-areas: 'title title' 'photo desc';
+    gap: 30px;
+}
+
+.film__title {
+    grid-area: title;
+    font-size: 28px;
+    font-weight: 300;
+}
+
+.film__img {
+    grid-area: photo;
+}
+
+.film__desc {
+    grid-area: desc;
+}
+
+.film__details {
+    color: aqua;
+}
+
+.film_text {
+    margin-top: 30px;
+    font-weight: 300;
+}
