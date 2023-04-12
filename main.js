@@ -47,8 +47,6 @@ async function fetchData(url, options) {
 
 function renderFilms(films) {
     for (film of films) {
-        console.log(film);
-
         const card = document.createElement('div');
         card.classList.add('card');
         card.id = film.filmId;
@@ -68,8 +66,13 @@ function renderFilms(films) {
     }
 }
 
-function openFilmDetails() {
-    console.log('openFilmDetails RUN!!!!');
+async function openFilmDetails(e) {
+    // Достаем id фильма
+    const id = e.currentTarget.id;
+
+    // Получаем данные фильма
+    const data = await fetchData(url + id, options);
+    console.log(data);
 }
 
 fetchAndRenderFilms().catch(err => console.log(err));
