@@ -81,6 +81,10 @@ async function openFilmDetails(e) {
 function renderFilmData(film) {
     console.log('RENDER!');
 
+    // 0. Проверка на открытый фильм, и его удаление
+    if (document.querySelector('.container-right'))
+        document.querySelector('.container-right').remove();
+
     // 1. Отрендерить container-right
     const containerRight = document.createElement('div');
     containerRight.classList.add('container-right');
