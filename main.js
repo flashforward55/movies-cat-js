@@ -12,28 +12,36 @@ const options = {
 // DOM элементы
 const filmsWrapper = document.querySelector('.films');
 const loader = document.querySelector('.loader-wrapper');
-const btnLoadMore = document.querySelector('.show-more');
+const btnShowMore = document.querySelector('.show-more');
+btnShowMore.onclick = fetchAndRenderFilms;
+
+let page = 1;
 
 // Получение и вывод ТОП 250 фильмов
 async function fetchAndRenderFilms() {
     // Show preloader
     loader.classList.remove('none');
 
+    console.log(page);
+
     // Fetch films data
-    const data = await fetchData(url + 'top', options);
+    const data = await fetchData(url + `top?page=${page}`, options);
+    if (data.pagesCount > 1) page++;
     console.log(data);
 
-    // Проверка на доп страницы и отображение кнопки
-    if (data.pagesCount > 1) {
-        // Отобразить кнопку "Еще 20 фильмов"
-        btnLoadMore.classList.remove('none');
-    }
+    console.log(page);
+
+    // Отображаем кнопку если страниц больше чем 1
+    if (data.pagesCount > 1) btnShowMore.classList.remove('none');
 
     // Hide preloader
     loader.classList.add('none');
 
     // Render films on page
     renderFilms(data.films);
+
+    // Скрыть кнопку если следующей страницы не существует
+    if (page > data.pagesCount) btnShowMore.classList.add('none');
 }
 
 async function fetchData(url, options) {
